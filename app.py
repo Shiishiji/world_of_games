@@ -9,5 +9,5 @@ def get_name() -> str:
 if __name__ == '__main__':
     name = get_name()
     MainMenu.welcome(name)
-    MainMenu.load_game()
+    MainMenu.load_game(name)
 

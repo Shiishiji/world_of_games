@@ -1,3 +1,4 @@
+import scoring.Score
 from games import MemoryGame, GuessGame, CurrencyRouletteGame
 from utils import InputUtils
 
@@ -8,7 +9,7 @@ Here you can find many cool games to play.
     """.format(name))
 
 
-def load_game() -> None:
+def load_game(name: str) -> None:
     available_games = {
         1: "Memory Game",
         2: "Guess Game",
@@ -38,6 +39,10 @@ guess it back
 
     if result:
         print("You won!")
+        scoring.Score.add_score(
+            user=name,
+            score=scoring.Score.calculate_points(difficulty=selected_difficulty)
+        )
     else:
         print("You lost!")
 
