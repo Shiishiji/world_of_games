@@ -10,6 +10,23 @@ def assert_score_csv_exist(file_path: str) -> None:
         file.write("")
 
 
+def read_all_scores_csv(file_path: str) -> list:
+    scores = []
+
+    with open(file_path) as csv_file:
+        reader = csv.reader(csv_file, delimiter=',', quotechar='|')
+        for row in reader:
+            if 0 == len(row):
+                continue
+
+            scores.append({
+                "player": row[0],
+                "score": row[1]
+            })
+
+    return scores
+
+
 def read_score_csv(file_path: str, player: str) -> int:
     score = 0
 
