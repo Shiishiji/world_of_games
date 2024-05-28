@@ -16,7 +16,7 @@ def play(difficulty: int) -> bool:
 
 def get_money_interval(number_of_money: int, difficulty: int) -> tuple:
     current_rate = get_latest_rate_from_frankfurter_api("USD", "ILS")
-    print("Current currency rate is {}".format(current_rate))  # If you have no clue like I had
+    # print("Current currency rate is {}".format(current_rate))  # If you have no clue like I had
 
     t = current_rate * number_of_money
     d = difficulty
