@@ -47,3 +47,18 @@ def get_string(prompt: str, min_length: int = None) -> str:
             continue
 
         return string
+
+
+def get_bool(prompt: str) -> bool:
+    while True:
+        string = input(prompt).strip()
+
+        regex = "^(1|t|true|y|yes)|(0|f|false|n|no)$"
+        r = re.match(regex, string, re.IGNORECASE)
+        if r.group(1):
+            return True
+        if r.group(2):
+            return False
+        else:
+            print("Invalid format - allowed [yes (y)/ no (n)].\n")
+            continue

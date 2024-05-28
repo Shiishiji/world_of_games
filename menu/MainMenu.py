@@ -1,6 +1,9 @@
+import time
+
 import scoring.Score
 from games import MemoryGame, GuessGame, CurrencyRouletteGame
 from utils import InputUtils
+from utils.General import clear_screen, EXIT_OPTION
 
 
 def welcome(name: str) -> None:
@@ -21,12 +24,15 @@ def load_game(name: str) -> None:
 guess it back
 2. Guess Game - guess a number and see if you chose like the computer
 3. Currency Roulette - try and guess the value of a random amount of USD in ILS
+0. Exit - say "bye bye" for now
     """)
 
     selected_game: int = select_game(available_games)
     selected_difficulty: int = select_difficulty()
 
     print("You are playing {} on {} difficulty.".format(available_games.get(selected_game), selected_difficulty))
+
+    display_loading_screen(available_games[selected_game])
 
     result = None
     match selected_game:
@@ -36,6 +42,9 @@ guess it back
             result = GuessGame.play(selected_difficulty)
         case 3:
             result = CurrencyRouletteGame.play(selected_difficulty)
+
+    clear_screen()
+    time.sleep(1)
 
     if result:
         print("You won!")
@@ -48,11 +57,18 @@ guess it back
 
 
 def select_game(allowed_games: dict) -> int:
-    return InputUtils.get_integer(
+    selected_game = InputUtils.get_integer(
         "Enter a number: ",
-        range_min=1,
+        range_min=0,
         range_max=len(allowed_games.keys())
     )
+
+    if EXIT_OPTION == selected_game:
+        clear_screen()
+        print("bye bye..")
+        exit(0)
+
+    return selected_game
 
 
 def select_difficulty() -> int:
@@ -65,3 +81,19 @@ def select_difficulty() -> int:
         range_max=range_max,
     )
 
+
+def display_loading_screen(game: str) -> None:
+    for x in range(2):
+        clear_screen()
+        print("Loading .")
+        time.sleep(0.5)
+        clear_screen()
+        print("Loading ..")
+        time.sleep(0.5)
+        clear_screen()
+        print("Loading ...")
+        time.sleep(0.5)
+
+    clear_screen()
+    print("Game started: {}".format(game), end="\n\n")
+    time.sleep(1)

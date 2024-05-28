@@ -8,7 +8,7 @@ from utils.General import clear_screen
 def play(difficulty: int) -> bool:
     generated_list = generate_sequence(difficulty)
 
-    print(str(generated_list).strip('()').rstrip(","), end="")
+    print(str(generated_list).strip('()').rstrip(","))
     time.sleep(0.7)
     clear_screen()
 
