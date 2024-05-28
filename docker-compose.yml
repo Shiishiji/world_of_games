@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - ./scoring/storage:/srv/wog/scoring/storage
+
+  scores:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    command: "python -m flask run --host 0.0.0.0"
+    volumes:
+      - ./scoring/storage:/srv/wog/scoring/storage
+    ports:
+      - "80:5000"
+    networks:
+      main:
+
+networks:
+  main:

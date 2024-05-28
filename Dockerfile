@@ -1,9 +1,12 @@
 # syntax=docker/dockerfile:1.7
-FROM alpine:3.20 as app
+FROM alpine:3.20 as base
 LABEL maintainer="shiishiji.dev@gmail.com"
 
 # Install python
 RUN apk add --no-cache py3-pip python3
+
+
+FROM base as app
 
 WORKDIR /srv/wog
 
