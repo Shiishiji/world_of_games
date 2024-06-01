@@ -33,5 +33,5 @@ docker compose -f docker-compose.yml -f docker-compose.test.yml up -d --remove-o
 
 Run tests (headless!!)
 ```shell
-docker compose -f docker-compose.yml -f docker-compose.test.yml run tests
+docker compose -f docker-compose.yml -f docker-compose.test.yml run tests python tests/e2e.py
 ```
