@@ -3,6 +3,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
+    command: "python cli.py"
     volumes:
       - ./scoring/storage:/srv/wog/scoring/storage
 
@@ -14,7 +15,7 @@ services:
     volumes:
       - ./scoring/storage:/srv/wog/scoring/storage
     ports:
-      - "80:5000"
+      - "8777:5000"
     networks:
       main:
 

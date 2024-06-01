@@ -1,0 +1,21 @@
+# syntax=docker/dockerfile:1.7
+FROM alpine:3.20 as base
+LABEL maintainer="shiishiji.dev@gmail.com"
+
+# Install python
+RUN apk add --no-cache py3-pip python3
+
+FROM base as test
+
+WORKDIR /srv/wog
+
+# Install dependencies first to prevent reinstallation after source code changes
+COPY requirements.test.txt .
+RUN pip install -r requirements.test.txt --break-system-packages
+
+# Define volumes
+VOLUME /srv/wog
+
+# Copy files
+# Using --link allows to reuse already built layers in subsequent builds with --cache-from even if the previous layers have changed.
+COPY --link tests ./tests
